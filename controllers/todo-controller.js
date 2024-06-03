@@ -1,17 +1,17 @@
 import {todoSchema,todos} from "../models/todo-model.js";
 
 
-const changeTodo = (req,res) => {
+const changeTodo =  async (req,res) => {
     const todo = todos.find(todo => todo.id === parseInt(req.params.id))
     if (!todo) return res.status(404).send("The todo with the given ID was not found.")
     const {error} = todoSchema.validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
-    let oldTodo = Object.assign({}, todo)
+    // let oldTodo = Object.assign({}, todo)
     todo.mission = req.body.mission
-    res.send(oldTodo, todo)
+    res.send( todo)
 }
 
-const deleteTodo= (req,res) => {
+const deleteTodo= async (req,res) => {
     const todo = todos.find(todo => todo.id === parseInt(req.params.id))
     if (!todo) return res.status(404).send("The todo with the given ID was not found.")
     const index = todos.indexOf(todo)
@@ -19,21 +19,28 @@ const deleteTodo= (req,res) => {
     res.send(`The todo with the ID ${req.params.id} was deleted.`)
 }
 
-const createTodo = (req,res) => {
+const completeTodo = async (req,res) => {
+    const todo = todos.find(todo => todo.id === parseInt(req.params.id))
+    if (!todo) return res.status(404).send("The todo with the given ID was not found.")
+    todo.isCompleted = !todo.isCompleted
+    res.send(todo)
+}
+
+const createTodo =  async (req,res) => {
     const {error} = todoSchema.validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
     const todo = {
-        id: todos.length + 1,
+        id: todos[todos.length-1].id + 1,
         mission: req.body.mission,
-        isCompleted: req.body.isCompleted
+        isCompleted: false
     }
     todos.push(todo)
     res.send(todo)
 
 }
 
-const getTodosById = (req,res) =>{
-    const todo = todo.find(todo => todo.id === parseInt(req.params.id))
+const getTodosById = async (req,res) =>{
+    const todo = todos.find(todo => todo.id === parseInt(req.params.id))
     if (!todo) return res.status(404).send("The todo with the given ID was not found.")
     res.send(todo)
 }
@@ -43,4 +50,4 @@ const getTodos = (req, res) => {
 }
 
 
-export {getTodosById, getTodos, createTodo, deleteTodo, changeTodo}
+export {getTodosById, getTodos, createTodo, deleteTodo, changeTodo, completeTodo}
