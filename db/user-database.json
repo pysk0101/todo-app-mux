@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "userName": "Ömer",
+        "todos": [
+            {
+                "id": 1,
+                "mission": "Buy groceries",
+                "isCompleted": false
+            },
+            {
+                "id": 2,
+                "mission": "Read a book",
+                "isCompleted": false
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "userName": "Muhammed",
+        "todos": [{
+            "id": 3,
+            "mission": "Finish homework",
+            "isCompleted": false
+        },
+        {
+            "id": 4,
+            "mission": "Clean the house",
+            "isCompleted": false
+        },
+        {
+            "id": 5,
+            "mission": "Pay bills",
+            "isCompleted": false
+        }]
+    }
+]
