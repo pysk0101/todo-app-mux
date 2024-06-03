@@ -1,0 +1,27 @@
+[
+    {
+        "id": "1",
+        "mission": "Buy groceries",
+        "completed": false
+    },
+    {
+        "id": "2",
+        "mission": "Read a book",
+        "completed": false
+    },
+    {
+        "id": "3",
+        "mission": "Finish homework",
+        "completed": false
+    },
+    {
+        "id": "4",
+        "mission": "Clean the house",
+        "completed": false
+    },
+    {
+        "id": "5",
+        "mission": "Pay bills",
+        "completed": false
+    }
+]
