@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <div class="input-container">
+            <input type="text" id="taskInput" placeholder="Yeni görev girin...">
+            <button id="addTaskButton">Ekle</button>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        document.getElementById('addTaskButton').addEventListener('click', function() {
+            var taskInput = document.getElementById('taskInput');
+            var taskText = taskInput.value;
+
+            if (taskText === '') {
+                alert('Lütfen bir görev girin.');
+                return;
+            }
+
+            var li = document.createElement('li');
+            li.appendChild(document.createTextNode(taskText));
+
+            var deleteButton = document.createElement('button');
+            deleteButton.appendChild(document.createTextNode('Sil'));
+            deleteButton.classList.add('delete');
+            deleteButton.addEventListener('click', function() {
+                li.remove();
+            });
+
+            li.appendChild(deleteButton);
+            document.getElementById('taskList').appendChild(li);
+            taskInput.value = '';
+        });
+    </script>
+</body>
+</html>
