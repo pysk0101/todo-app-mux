@@ -1,45 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="./style/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
-    <div class="container">
-        <h1>To-Do List</h1>
-        <div class="input-container">
-            <input type="text" id="taskInput" placeholder="Yeni görev girin...">
-            <button id="addTaskButton">Ekle</button>
-        </div>
-        <ul id="taskList"></ul>
+  <div class="container">
+    <h1>To-Do List</h1>
+    <div class="input-group">
+      <input type="text" id="taskInput" placeholder="Add new task">
+      <button id="addTaskBtn">Add Task</button>
     </div>
+    <ul id="taskList">
+      <!-- To-Do Items will be dynamically added here -->
+    </ul>
+  </div>
 
-    <script>
-        document.getElementById('addTaskButton').addEventListener('click', function() {
-            var taskInput = document.getElementById('taskInput');
-            var taskText = taskInput.value;
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const taskInput = document.getElementById('taskInput');
+      const addTaskBtn = document.getElementById('addTaskBtn');
+      const taskList = document.getElementById('taskList');
 
-            if (taskText === '') {
-                alert('Lütfen bir görev girin.');
-                return;
-            }
+      addTaskBtn.addEventListener('click', function () {
+        const taskText = taskInput.value.trim();
+        if (taskText !== '') {
+          const li = document.createElement('li');
+          li.innerHTML = `
+        <span>${taskText}</span>
+        <button class="delete-btn">Delete</button>
+      `;
+          taskList.appendChild(li);
+          taskInput.value = '';
+        }
+      });
 
-            var li = document.createElement('li');
-            li.appendChild(document.createTextNode(taskText));
+      taskList.addEventListener('click', function (e) {
+        if (e.target.classList.contains('delete-btn')) {
+          e.target.parentElement.remove();
+        }
+      });
+    });
 
-            var deleteButton = document.createElement('button');
-            deleteButton.appendChild(document.createTextNode('Sil'));
-            deleteButton.classList.add('delete');
-            deleteButton.addEventListener('click', function() {
-                li.remove();
-            });
-
-            li.appendChild(deleteButton);
-            document.getElementById('taskList').appendChild(li);
-            taskInput.value = '';
-        });
-    </script>
+  </script>
 </body>
+
 </html>
