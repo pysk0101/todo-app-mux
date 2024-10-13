@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/pysk0101/todo-app-mux/backend/internal/core/domain"
 	"github.com/pysk0101/todo-app-mux/backend/internal/core/ports"
 )
@@ -26,7 +27,10 @@ func NewTodoHandler(service ports.TodoService) ITodoHandler {
 func (h *TodoHandler) Create(w http.ResponseWriter, r *http.Request) {
 	var todo domain.Todo
 
-	json.NewDecoder(r.Body).Decode(&todo)
+	if err := json.NewDecoder(r.Body).Decode(&todo); err != nil {
+		http.Error(w, "Invalid input", http.StatusBadRequest)
+		return
+	}
 
 	err := h.service.Create(&todo)
 	if err != nil {
@@ -48,7 +52,10 @@ func (h *TodoHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 func (h *TodoHandler) Update(w http.ResponseWriter, r *http.Request) {
 	var todo domain.Todo
 
-	json.NewDecoder(r.Body).Decode(&todo)
+	if err := json.NewDecoder(r.Body).Decode(&todo); err != nil {
+		http.Error(w, "Invalid input", http.StatusBadRequest)
+		return
+	}
 
 	err := h.service.Update(&todo)
 	if err != nil {
@@ -59,7 +66,8 @@ func (h *TodoHandler) Update(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *TodoHandler) Delete(w http.ResponseWriter, r *http.Request) {
-	id := r.URL.Query().Get("id")
+	vars := mux.Vars(r)
+	id := vars["id"]
 
 	err := h.service.Delete(id)
 	if err != nil {

@@ -23,24 +23,15 @@ func (s *TodoServiceImpl) GetAll() ([]*domain.Todo, error) {
 
 func (s *TodoServiceImpl) Create(todo *domain.Todo) error {
 	err := s.repo.Create(todo)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
 
 func (s *TodoServiceImpl) Update(todo *domain.Todo) error {
 	err := s.repo.Update(todo)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
 
 func (s *TodoServiceImpl) Delete(id string) error {
 	err := s.repo.Delete(id)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
