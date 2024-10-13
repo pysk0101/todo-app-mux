@@ -3,6 +3,7 @@ module github.com/pysk0101/todo-app-mux/backend
 go 1.23.1
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gorilla/mux v1.8.1
 	github.com/joho/godotenv v1.5.1
 	github.com/tursodatabase/libsql-client-go v0.0.0-20240902231107-85af5b9d094d
