@@ -6,9 +6,8 @@ import (
 	"github.com/pysk0101/todo-app-mux/backend/internal/core/ports"
 )
 
-func NewRouter(todoService ports.TodoService, userService ports.UserService) *mux.Router {
+func NewRouter(router *mux.Router, todoService ports.TodoService, userService ports.UserService) *mux.Router {
 	// Gorilla Mux router'ı oluştur
-	router := mux.NewRouter()
 
 	// Todo handler'ı oluştur
 	todoHandler := handler.NewTodoHandler(todoService)
